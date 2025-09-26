@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Fixed Navbar</title>
+  <!-- FONT AWESOME CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar container */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #393187 
+;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+      z-index: 1000;
+    }
+
+    /* Logo section */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .logo span {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #f39c12;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    /* Mobile menu hidden */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #393187;
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .slide img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .overlay {
+      position: relative;
+      text-align: center;
+      max-width: 80%;
+      z-index: 1;
+    }
+
+    .overlay h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .overlay span {
+        color: #32CD32;
+    }
+
+    .overlay p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .overlay a {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: #32CD32;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .overlay a:hover {
+      background: #90EE90;
+    }
+
+    /* Prev & Next buttons */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      z-index: 2;
+    }
+
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    /* Responsive text */
+    @media(max-width:768px){
+      .overlay h1 {font-size: 2rem;}
+      .overlay p {font-size: 1rem;}
+    }
+
+    @media(max-width:480px){
+      .overlay h1 {font-size: 1.5rem;}
+      .overlay p {font-size: 0.9rem;}
+      .overlay a {padding: 0.6rem 1.2rem; font-size: 0.9rem;}
+    }
+
+    .about-container {
+        padding: 40px 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    .grid-div {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .grid-div:hover {
+        transform: translateY(-5px);
+    }
+
+    .about-container strong {
+        color: #2196f3;
+    }
+
+    .about-container .reach-btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: #32CD32;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .about-container .reach-btn:hover {
+        background-color: #90EE90;
+    }
+
+    .offer-container {
+        padding: 40px 20px;
+        background-color: #f4f7fa;
+        text-align: center;
+    }
+
+    .offer-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #111;
+  }
+
+  .offer-container .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #555;
+  }
+
+  /* Grid layout */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  /* Card styling */
+  .offer-card {
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .offer-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.12);
+  }
+
+  .offer-card i {
+    font-size: 2.5rem;
+    color: #2196f3;
+    margin-bottom: 15px;
+  }
+
+  .offer-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #111;
+  }
+
+  .offer-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .gallery-container {
+    padding: 40px 20px;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .gallery-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #111;
+  }
+
+  .gallery-container .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #555;
+    text-transform: capitalize;
+  }
+
+  /* Grid layout */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.08);
+  }
+
+  /* Modal styling */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 80px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    overflow: auto;
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  }
+
+  .close {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: #ff5252;
+  }
+
+  .join-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #555;
+    text-align: center;
+  }
+
+  .join-us h1 {
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .join-us p {
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: capitalize;
+    font-size: 17px;
+  }
+
+  .join-us a {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: #32CD32;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .join-us a:hover {
+    background-color: #90EE90;
+  }
+
+  .contact-container {
+    padding: 80px 20px;
+    background: #f9f9f9;
+    text-align: center;
+  }
+
+  .contact-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #111;
+  }
+
+  .contact-container .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+    color: #555;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+  }
+
+  .contact-form .form-group {
+    margin-bottom: 20px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease;
+    resize: none;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border: 1px solid #2196f3;
+  }
+
+  .contact-form button {
+    background: #2196f3;
+    color: #fff;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .contact-form button:hover {
+    background: #1769aa;
+    transform: translateY(-3px);
+  }
+
+  .contact-info .info-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+
+  .contact-info .info-box i {
+    font-size: 2rem;
+    color: #2196f3;
+    margin-bottom: 10px;
+  }
+
+  .contact-info .info-box h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .contact-info .info-box p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="image/logo png.png" alt="Logo">
+      <span>Meks Digitech</span>
+    </div>
+
+    <!-- Links -->
+    <div class="nav-links" id="navLinks">
+      <a href="">Home</a>
+      <a href="#about">About</a>
+      <a href="#offer">Offerings</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#join">Join</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <!-- Hamburger -->
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <div class="carousel">
+    <div class="slides" id="slides">
+      
+      <!-- Slide 1 -->
+      <div class="slide">
+        <img src="image/istockphoto-2200128716-612x612.webp" alt="Robotics">
+        <div class="overlay">
+          <h1>MEKS Coding & Robotic Club</h1>
+          <p>Unlock the world of technology, coding, and robotics with hands-on learning and real projects.</p>
+          <a href="">Get Started</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide">
+        <img src="image/gettyimages-1395428816-2048x2048.jpg" alt="Coding">
+        <div class="overlay">
+          <h1>Build, Code & <span>Innovate</span></h1>
+          <p>Explore the future with robotics programs designed to inspire creativity and problem-solving.</p>
+          <a href="">Learn More</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide">
+        <img src="image/istockphoto-2219678630-612x612.webp" alt="Team">
+        <div class="overlay">
+          <h1>Empowering Young Minds</h1>
+          <p>We nurture tomorrow’s tech leaders with mentorship, teamwork, and competitions worldwide.</p>
+          <a href="">Sign Up</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Prev & Next -->
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+
+  <div class="about-container" id="about">
+    <h1>About Us</h1>
+    <p>MEKS Coding and Robotic Club is a creative hub for young minds passionate about technology. We teach coding, robotics, and problem-solving skills to prepare students for the digital future.</p>
+    <br> <br>
+    <div class="grid-container">
+        <div class="grid-div">
+            <h4>Why This Matters for Our Students</h4>
+            <ul>
+                <li>Coding improves logical thinking, creativity, and problem-solving.</li>
+                <li>Robotics sparks curiosity and makes learning science and math practical.</li>
+                <li>Students gain digital confidence, ensuring they become creators, not just consumers.</li>
+            </ul>
+        </div>
+
+        <div class="grid-div">
+            <h4>What the Club Offers</h4>
+            <p>Our curriculum is hands-on, exciting, and tailored for secondary school learners. Areas we cover include:</p>
+            <ul>
+                <li>Web Development using HTML, CSS, JavaScript.</li>
+                <li>Game Development with Scratch, Kodu, and Python.</li>
+                <li>Robotics & Hardware Programming with Arduino.</li>
+                <li>App Development on beginner-friendly platforms.</li>
+                <li>Problem-Solving Challenges to sharpen critical thinking.</li>
+            </ul>
+            <p>Each module ensures students don’t just memorize code but actually build projects—websites, apps, robots, and games. They leave with both knowledge and a portfolio of creations.</p>
+        </div>
+
+        <div class="grid-div">
+            <h4>Why This Matters for our Club</h4>
+            <ul>
+                <li>Position your school as a forward-looking institution with future-ready skills.</li>
+                <li>Raise your profile among parents eager to see their children excel in technology.</li>
+                <li>Provide opportunities for coding & robotics competitions that bring recognition and prestige.</li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <p>At MEKS Coding Club, we believe every child has the potential to invent, innovate, and inspire. By hosting the club at your school, you provide students with more than an extracurricular activity—you give them a <strong>launchpad into the future of technology.</strong></p>
+    <br>
+    <a class="reach-btn" href="">Reach Out</a>
+  </div>
+
+  <div class="offer-container" id="offer">
+    <h2>What We Offer</h2>
+    <p class="subtitle">
+      At MEKS Coding & Robotic Club, we provide students with hands-on opportunities to 
+      explore technology and build future-ready skills.
+    </p>
+
+    <div class="offer-grid">
+      <div class="offer-card">
+        <i class="fas fa-code"></i>
+        <h3>HTML, CSS & JavaScript</h3>
+        <p>Master the fundamentals of web development and build real websites from scratch.</p>
+      </div>
+
+      <div class="offer-card">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Coding Classes</h3>
+        <p>Engaging lessons in Scratch, Python, and web development for kids & teens.</p>
+      </div>
+
+      <div class="offer-card">
+        <i class="fas fa-gamepad"></i>
+        <h3>Game Development</h3>
+        <p>Create fun and interactive games while learning logic, creativity, and teamwork.</p>
+      </div>
+
+      <div class="offer-card">
+        <i class="fas fa-user-graduate"></i>
+        <h3>Mentorship & Career Guidance</h3>
+        <p>One-on-one mentorship to inspire, guide, and prepare students for tech careers.</p>
+      </div>
+
+      <div class="offer-card">
+        <i class="fas fa-robot"></i>
+        <h3>Kids & Teens Tech Programs</h3>
+        <p>Hands-on robotics, app building, and coding programs tailored for young learners.</p>
+      </div>
+
+      <div class="offer-card">
+        <i class="fas fa-microchip"></i>
+        <h3>Robotics & Hardware Programming</h3>
+        <p>Explore Arduino, sensors, and electronics while building robots and smart devices.</p>
+      </div>
+
+      <div class="offer-card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h3>Problem-Solving Challenges</h3>
+        <p>Sharpen critical thinking skills through coding challenges, competitions, and projects.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-container" id="gallery">
+    <h2>Our Gallery</h2>
+    <p class="subtitle">A glimpse into our coding and robotics activities, workshops, and student projects.</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="image/istockphoto-2189337536-612x612.webp" alt="Gallery Image 1" onclick="openModal(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="image/istockphoto-2173640219-612x612.webp" alt="Gallery Image 2" onclick="openModal(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="image/istockphoto-2077222742-612x612.jpg" alt="Gallery Image 3" onclick="openModal(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="image/istockphoto-2204916274-612x612.jpg" alt="Gallery Image 4" onclick="openModal(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="image/istockphoto-2077355974-612x612.jpg" alt="Gallery Image 5" onclick="openModal(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="image/istockphoto-1569540490-612x612.jpg" alt="Gallery Image 6" onclick="openModal(this)">
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL FOR IMAGE PREVIEW -->
+  <div id="galleryModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <div class="join-us" id="join">
+    <di>
+        <h1>Join Us at MEKS Coding & Robotic Club</h1>
+        <p>Be part of a creative community where young minds explore coding, robotics, and problem-solving. Together, we are shaping the next generation of tech innovators.</p>
+        <a href="">Get Started</a>
+    </di>
+  </div>
+
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <p class="subtitle">We’d love to hear from you! Reach out for inquiries, collaborations, or to join our club.</p>
+
+    <div class="contact-grid">
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <form action="#" method="post">
+          <div class="form-group">
+            <input type="text" placeholder="Full Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Subject" required>
+          </div>
+          <div class="form-group">
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="info-box">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Our Address</h3>
+          <p>N0_ 37 Old Abakiliki Road Igwe Plaza<br>Oye Emene, Enugu State</p>
+        </div>
+        <div class="info-box">
+          <i class="fas fa-phone"></i>
+          <h3>Call Us</h3>
+          <p>+234 703 804 5970</p>
+        </div>
+        <div class="info-box">
+          <i class="fas fa-envelope"></i>
+          <h3>Email Us</h3>
+          <p>meksdigitech@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // for the carousel
+    let index = 0;
+    const slides = document.getElementById("slides");
+    const totalSlides = document.querySelectorAll(".slide").length;
+
+    function moveSlide(step) {
+      index = (index + step + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    // Auto slide (optional)
+    setInterval(() => moveSlide(1), 6000);
+
+    // for the modal section
+    function openModal(img) {
+    var modal = document.getElementById("galleryModal");
+    var modalImg = document.getElementById("modalImage");
+    modal.style.display = "block";
+    modalImg.src = img.src;
+  }
+
+  function closeModal() {
+    document.getElementById("galleryModal").style.display = "none";
+  }
+  </script>
+</body>
+</html>
