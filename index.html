@@ -204,48 +204,65 @@
       .overlay a {padding: 0.6rem 1.2rem; font-size: 0.9rem;}
     }
 
-    .about-container {
-        padding: 40px 20px;
-        background-color: #f9f9f9;
-        text-align: center;
-    }
+    .about-us {
+  padding: 80px 20px;
+  background: #f5faff;
+}
 
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-    }
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
 
-    .grid-div {
-        background-color: #fff;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-    }
+.about-image img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
 
-    .grid-div:hover {
-        transform: translateY(-5px);
-    }
+.about-content h1 {
+  font-size: 2.5rem;
+  color: #0077ff;
+  margin-bottom: 20px;
+}
 
-    .about-container strong {
-        color: #2196f3;
-    }
+.about-content p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
 
-    .about-container .reach-btn {
-        display: inline-block;
-        padding: 0.8rem 1.5rem;
-        background: #32CD32;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background 0.3s;
-    }
+.about-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #0077ff;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
 
-    .about-container .reach-btn:hover {
-        background-color: #90EE90;
-    }
+.about-btn:hover {
+  background: #005bb5;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-content {
+    margin-top: 20px;
+  }
+}
 
     .offer-container {
         padding: 40px 20px;
@@ -429,19 +446,19 @@
     background-color: #90EE90;
   }
 
-  .contact-container {
-    padding: 80px 20px;
-    background: #f9f9f9;
+  .contact-us {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
     text-align: center;
   }
 
-  .contact-container h2 {
+  .contact-us h1 {
     font-size: 2.5rem;
     margin-bottom: 15px;
     color: #111;
   }
 
-  .contact-container .subtitle {
+  .contact-us p {
     font-size: 1.1rem;
     margin-bottom: 50px;
     color: #555;
@@ -452,73 +469,111 @@
 
   .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
   }
 
-  .contact-form .form-group {
-    margin-bottom: 20px;
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
+
+  .contact-form label {
+    font-weight: 600;
+    color: #444;
+  } 
 
   .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 14px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    outline: none;
-    transition: border 0.3s ease;
-    resize: none;
+.contact-form textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.btn {
+  background: #0077ff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #005bb5;
+}
+
+.contact-info .info-div {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.contact-info .info-div:hover {
+  transform: translateY(-5px);
+}
+
+.contact-info i {
+  font-size: 1.5rem;
+  color: #0077ff;
+  margin-bottom: 10px;
+}
+
+.contact-info h3 {
+  margin: 5px 0;
+  color: #333;
+}
+
+.contact-info p,
+.contact-info a {
+  color: #666;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  color: #0077ff;
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
   }
 
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    border: 1px solid #2196f3;
-  }
-
-  .contact-form button {
-    background: #2196f3;
-    color: #fff;
-    padding: 14px 30px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-
-  .contact-form button:hover {
-    background: #1769aa;
-    transform: translateY(-3px);
-  }
-
-  .contact-info .info-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  .contact-form, .contact-info {
     text-align: center;
   }
 
-  .contact-info .info-box i {
-    font-size: 2rem;
-    color: #2196f3;
-    margin-bottom: 10px;
+  .contact-info .info-div {
+    max-width: 500px;
+    margin: 0 auto 20px;
   }
+}
 
-  .contact-info .info-box h3 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-    color: #111;
-  }
-
-  .contact-info .info-box p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.5;
-  }
+footer {
+      background: #393187;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
 
   </style>
 </head>
@@ -558,7 +613,7 @@
         <div class="overlay">
           <h1>MEKS Coding & Robotic Club</h1>
           <p>Unlock the world of technology, coding, and robotics with hands-on learning and real projects.</p>
-          <a href="">Get Started</a>
+          <a href="#contact">Get Started</a>
         </div>
       </div>
 
@@ -568,7 +623,7 @@
         <div class="overlay">
           <h1>Build, Code & <span>Innovate</span></h1>
           <p>Explore the future with robotics programs designed to inspire creativity and problem-solving.</p>
-          <a href="">Learn More</a>
+          <a href="#contact">Learn More</a>
         </div>
       </div>
 
@@ -578,7 +633,7 @@
         <div class="overlay">
           <h1>Empowering Young Minds</h1>
           <p>We nurture tomorrow’s tech leaders with mentorship, teamwork, and competitions worldwide.</p>
-          <a href="">Sign Up</a>
+          <a href="#contact">Sign Up</a>
         </div>
       </div>
 
@@ -589,47 +644,30 @@
     <button class="next" onclick="moveSlide(1)">&#10095;</button>
   </div>
 
-  <div class="about-container" id="about">
-    <h1>About Us</h1>
-    <p>MEKS Coding and Robotic Club is a creative hub for young minds passionate about technology. We teach coding, robotics, and problem-solving skills to prepare students for the digital future.</p>
-    <br> <br>
-    <div class="grid-container">
-        <div class="grid-div">
-            <h4>Why This Matters for Our Students</h4>
-            <ul>
-                <li>Coding improves logical thinking, creativity, and problem-solving.</li>
-                <li>Robotics sparks curiosity and makes learning science and math practical.</li>
-                <li>Students gain digital confidence, ensuring they become creators, not just consumers.</li>
-            </ul>
-        </div>
-
-        <div class="grid-div">
-            <h4>What the Club Offers</h4>
-            <p>Our curriculum is hands-on, exciting, and tailored for secondary school learners. Areas we cover include:</p>
-            <ul>
-                <li>Web Development using HTML, CSS, JavaScript.</li>
-                <li>Game Development with Scratch, Kodu, and Python.</li>
-                <li>Robotics & Hardware Programming with Arduino.</li>
-                <li>App Development on beginner-friendly platforms.</li>
-                <li>Problem-Solving Challenges to sharpen critical thinking.</li>
-            </ul>
-            <p>Each module ensures students don’t just memorize code but actually build projects—websites, apps, robots, and games. They leave with both knowledge and a portfolio of creations.</p>
-        </div>
-
-        <div class="grid-div">
-            <h4>Why This Matters for our Club</h4>
-            <ul>
-                <li>Position your school as a forward-looking institution with future-ready skills.</li>
-                <li>Raise your profile among parents eager to see their children excel in technology.</li>
-                <li>Provide opportunities for coding & robotics competitions that bring recognition and prestige.</li>
-            </ul>
-        </div>
+  <section class="about-us" id="about">
+  <div class="about-container">
+    
+    <!-- Image -->
+    <div class="about-image">
+      <img src="image/photo-1581092580497-e0d23cbdf1dc.jpeg" alt="Robotics & Coding Club">
     </div>
-    <br>
-    <p>At MEKS Coding Club, we believe every child has the potential to invent, innovate, and inspire. By hosting the club at your school, you provide students with more than an extracurricular activity—you give them a <strong>launchpad into the future of technology.</strong></p>
-    <br>
-    <a class="reach-btn" href="">Reach Out</a>
+
+    <!-- Text Content -->
+    <div class="about-content">
+      <h1>About Us</h1>
+      <p>
+        Welcome to <strong>MEKS Coding & Robotic Club</strong>, a creative hub where young innovators 
+        explore the exciting world of technology. We provide a fun and engaging environment that 
+        empowers kids and teens to learn coding, robotics, game development, and web technologies.  
+      </p>
+      <p>
+        Our mission is to inspire curiosity, spark innovation, and prepare the next generation 
+        of problem solvers and tech leaders through hands-on learning, mentorship, and teamwork.  
+      </p>
+      <a href="#contact" class="about-btn">Join Our Community</a>
+    </div>
   </div>
+</section>
 
   <div class="offer-container" id="offer">
     <h2>What We Offer</h2>
@@ -719,54 +757,52 @@
     <di>
         <h1>Join Us at MEKS Coding & Robotic Club</h1>
         <p>Be part of a creative community where young minds explore coding, robotics, and problem-solving. Together, we are shaping the next generation of tech innovators.</p>
-        <a href="">Get Started</a>
+        <a href="#contact">Get Started</a>
     </di>
   </div>
 
-  <div class="contact-container">
-    <h2>Contact Us</h2>
-    <p class="subtitle">We’d love to hear from you! Reach out for inquiries, collaborations, or to join our club.</p>
-
+  <div class="contact-us" id="contact">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you! Reach out for inquiries, collaborations, or to join our club.</p>
     <div class="contact-grid">
-      <!-- Contact Form -->
       <div class="contact-form">
-        <form action="#" method="post">
-          <div class="form-group">
-            <input type="text" placeholder="Full Name" required>
-          </div>
-          <div class="form-group">
-            <input type="email" placeholder="Email Address" required>
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="Subject" required>
-          </div>
-          <div class="form-group">
-            <textarea rows="5" placeholder="Your Message" required></textarea>
-          </div>
+        <form>
+          <label for="fname">Full Name</label>
+          <input type="text" id="fname" placeholder="Enter your full name" required>
+
+          <label for="email">Email Address</label>
+          <input type="text" id="email" placeholder="Enter your mail address" required>
+
+          <textarea placeholder="Type in your message" required></textarea>
           <button type="submit" class="btn">Send Message</button>
         </form>
       </div>
 
-      <!-- Contact Info -->
       <div class="contact-info">
-        <div class="info-box">
+        <div class="info-div">
           <i class="fas fa-map-marker-alt"></i>
           <h3>Our Address</h3>
           <p>N0_ 37 Old Abakiliki Road Igwe Plaza<br>Oye Emene, Enugu State</p>
         </div>
-        <div class="info-box">
+
+        <div class="info-div">
           <i class="fas fa-phone"></i>
-          <h3>Call Us</h3>
-          <p>+234 703 804 5970</p>
+          <h3>Call number</h3>
+          <a href="tel:+2348039572823">Call Us: +234 803 957 2823</a>
         </div>
-        <div class="info-box">
+
+        <div class="info-div">
           <i class="fas fa-envelope"></i>
-          <h3>Email Us</h3>
-          <p>meksdigitech@gmail.com</p>
+          <h3>Email Address</h3>
+          <a href="mailto:meksdigitech@gmail.com">Email Us: meksdigitech@gmail.com</a>
         </div>
       </div>
     </div>
   </div>
+
+  <footer>
+    <p>&copy; <span id="year"></span> MEKS Coding & Robotic Club | All rights reserved.</p>
+  </footer>
   
   <script>
     const hamburger = document.getElementById('hamburger');
@@ -800,6 +836,9 @@
   function closeModal() {
     document.getElementById("galleryModal").style.display = "none";
   }
+
+  // for the date
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
